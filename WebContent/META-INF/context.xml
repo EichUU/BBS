@@ -1,0 +1,18 @@
+<!-- <?xml version="1.0" encoding="UTF-8"?>-->
+
+<Context>
+	<Resource 
+		name="jdbc/MysqlDB"
+		auth="Container"
+		
+		type="javax.sql.DataSource" 
+		
+		username="root"
+		password="1111"
+		driverClassName="org.mariadb.jdbc.Driver"
+		
+		factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory" 
+		url="jdbc:mysql://localhost:3306/bigjava"
+		maxActive="500"
+		maxIdle="100"/>	
+</Context>
