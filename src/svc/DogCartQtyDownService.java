@@ -10,6 +10,7 @@ import vo.Cart;
 public class DogCartQtyDownService {	// 장바구니 항목 수량 감소 요청을 처리하는 비즈니스 로직
 
 	public void downCartQty(String kind, HttpServletRequest request) {
+		
 		HttpSession session=request.getSession();
 		ArrayList<Cart> cartList=(ArrayList<Cart>)session.getAttribute("cartList");
 		
@@ -17,7 +18,7 @@ public class DogCartQtyDownService {	// 장바구니 항목 수량 감소 요청
 													//해당 객체의 수량 값을 감소시킨다
 
 			if(cartList.get(i).getKind().equals(kind)) {
-			cartList.get(i).setQty(cartList.get(i).getQty()-1);
+				cartList.get(i).setQty(cartList.get(i).getQty()-1);
 			}
 		}
 	}

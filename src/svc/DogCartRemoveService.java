@@ -20,7 +20,7 @@ public class DogCartRemoveService {	// 장바구니 항목 삭제 요청을 처�
 			for(int j=0; j<cartList.size(); j++) {
 				
 				if(cartList.get(j).getKind().equals(kindArray[i])) {
-					cartList.remove(cartList.get(j));
+					cartList.remove(cartList.get(j));					
 					
 				}
 			}

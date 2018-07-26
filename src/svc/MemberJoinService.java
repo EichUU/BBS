@@ -1,15 +1,15 @@
 package svc;
 
-import static db.JdbcUtil.getConnection;
+import static db.JdbcUtil.*;
 
 import java.sql.Connection;
 
 import dao.LoginDAO;
 import vo.Member;
 
-public class JoinService {
+public class MemberJoinService {
 
-	public boolean JoinMember(Member member) throws Exception {
+	public boolean JoinMember(Member member)  {
 		
 		boolean isJoinSuccess=false;
 		
@@ -20,12 +20,12 @@ public class JoinService {
 		int insertCount=loginDAO.joinMember(member); //주소값을 저장 , 주소가 있으면 1, 없으면 0
 		
 		if(insertCount>0) {
-			conn.commit();
+			commit(conn);
 			isJoinSuccess=true;
 		}else {
-			conn.rollback();
+			rollback(conn);
 		}
-		conn.close();
+		close(conn);
 		
 		return isJoinSuccess;
 		

@@ -33,13 +33,13 @@ public class BoardModifyProService {
 		
 		int updateCount=boardDAO.updateArticle(article);
 		if(updateCount>0) {
-			conn.commit();
+			commit(conn);
 			isModifySuccess=true;
 		}else {
-			conn.rollback();
+			rollback(conn);
 		}
 		
-		conn.close();
+		close(conn);
 		
 		return isModifySuccess;
 	}

@@ -37,8 +37,8 @@ public class BoardReplyProAction implements Action {
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out=response.getWriter();
 			out.println("<script>");
-			out.println("alert('답장실패')");
-			out.println("history.back()");
+			out.println("alert('답장실패');");
+			out.println("history.back();");
 			out.println("</script>");
 		}
 				

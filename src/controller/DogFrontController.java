@@ -26,6 +26,8 @@ import vo.ActionForward;
 public class DogFrontController extends HttpServlet {	//DogShopping 프로젝트의 모든 웹 요청은 이 곳 서블릿으로 요청되고 
 														//전체요청이 이 부분에서 제어된다
 
+	private static final long serialVersionUID=1L;
+	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -78,7 +80,7 @@ public class DogFrontController extends HttpServlet {	//DogShopping 프로젝트
 				System.out.println("dogCartAdd.dog 에러 : "+e.getMessage());
 			}
 		}
-		else if(command.equals("/dogCartList")) {
+		else if(command.equals("/dogCartList.dog")) {
 			action=new DogCartListAction();
 			try {
 				forward=action.execute(request, response);

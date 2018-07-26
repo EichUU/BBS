@@ -1,6 +1,6 @@
 package svc;
 
-import static db.JdbcUtil.getConnection;
+import static db.JdbcUtil.*;
 
 import java.sql.Connection;
 
@@ -10,7 +10,7 @@ import vo.PageInfo;
 
 public class BoardDetailService {
 
-	public BoardBean getArticle(int board_num) throws Exception {
+	public BoardBean getArticle(int board_num)  {
 		
 		BoardBean article=null;
 		Connection conn=getConnection();
@@ -19,13 +19,13 @@ public class BoardDetailService {
 		
 		int updateCount=boardDAO.updateReadCount(board_num);
 		if(updateCount>0) {
-			conn.commit();
+			commit(conn);
 		}else {
-			conn.rollback();
+			rollback(conn);
 		}
 		
 		article=boardDAO.selectArticle(board_num);
-		conn.close();
+		close(conn);
 		
 		return article;
 	}

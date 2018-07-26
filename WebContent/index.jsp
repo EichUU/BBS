@@ -12,7 +12,7 @@
 <title>index</title>
 <script>
 	function join(){
-		location.href="joinForm.jsp"
+		location.href="memberJoin.bo"
 	}
 </script>
 <style>
@@ -73,7 +73,7 @@ table{
 	margin:auto;
 	padding:10px;
 	width:1024px;
-	height:100px;
+	height:50px;
 	border:1px solid #ccc;
 }
 #left{	
@@ -113,7 +113,7 @@ table{
 	<%	if(id==null) { %>	
 	<div id="top-right">
 		<h3>로그인</h3>
-		<form action="Login" method="post">
+		<form action="memberLoginAction.bo" method="post">
 			<fieldset>
 				<table>
 					<tr>
@@ -167,7 +167,7 @@ table{
 	
 	<div id="clear"></div>
 	<div id="bottom">
-	bottom
+	 	<a href="memberListAction.bo">관리자페이지</a>
 	</div>
 	
 </div>

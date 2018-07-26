@@ -54,7 +54,7 @@ public ActionForward execute(HttpServletRequest request, HttpServletResponse res
 				PrintWriter out=response.getWriter();
 				out.println("<script>");
 				out.println("alert('수정실패');");
-				out.println("history.back()");
+				out.println("history.back();");
 				out.println("</script>");
 			}else {
 					

@@ -3,11 +3,8 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
-import javax.xml.ws.Response;
-
-
-import vo.BoardBean;
 import vo.Member;
 
 public class LoginDAO {
@@ -32,29 +29,21 @@ public class LoginDAO {
 	}
 	
 	//로그인관련 sql구문
-	public Member selectLoginMember(String id, String passwd) {
+	public String selectLoginId(Member member) {
 		
-		Member loginMember=null;
+		String loginId=null;
 		
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		
 		try {
 			pstmt=conn.prepareStatement("select * from users where id=? and passwd=?");
-			pstmt.setString(1, id);
-			pstmt.setString(2, passwd);
+			pstmt.setString(1, member.getId());
+			pstmt.setString(2, member.getPasswd());
 			rs=pstmt.executeQuery();
 			
-			if(rs.next()) {
-				loginMember=new Member();
-				loginMember.setId(rs.getString("id"));
-				loginMember.setPasswd(rs.getString("passwd"));
-				loginMember.setAddr(rs.getString("addr"));
-				loginMember.setAge(rs.getInt("age"));
-				loginMember.setEmail(rs.getString("email"));
-				loginMember.setGender(rs.getString("gender"));					
-				loginMember.setName(rs.getString("name"));
-				loginMember.setNation(rs.getString("nation"));					
+			if(rs.next()) {				
+				loginId=rs.getString("id");					
 			}
 		}catch(Exception e) {
 			System.out.println("아이디 혹은 비밀번호 오류1 : "+e.getMessage());
@@ -67,7 +56,7 @@ public class LoginDAO {
 			}
 		}
 		
-		return loginMember;
+		return loginId;
 	}
 	
 	//회원가입 관련 sql 구문
@@ -75,14 +64,12 @@ public class LoginDAO {
 		
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;			
-		String sql="";
+		
 		int insertCount=0;
 		
 		try {
 											
-			sql="insert into users values(?,?,?,?,?,?,?,?)";
-			
-			pstmt=conn.prepareStatement(sql);
+			pstmt=conn.prepareStatement("insert into users values(?,?,?,?,?,?,?,?)");
 			pstmt.setString(1, join.getId());
 			pstmt.setString(2, join.getPasswd());
 			pstmt.setString(3, join.getAddr());
@@ -109,6 +96,7 @@ public class LoginDAO {
 				
 	}
 	
+	//아이디 중복확인
 	public String joinCheck(String idCheck) {
 		
 		String checkMember=null;
@@ -137,6 +125,115 @@ public class LoginDAO {
 		}
 					
 		return checkMember;
+	}
+	
+	//회원정보보기
+	public ArrayList<Member> selectMemberList() {
+
+		ArrayList<Member> memberList=new ArrayList<Member>();
+		Member mb=null;
+		
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;	
+		
+		try {
+			pstmt=conn.prepareStatement("select * from users");
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				do {
+					mb=new Member();
+					mb.setId(rs.getString("id"));
+					mb.setPasswd(rs.getString("passwd"));
+					mb.setAddr(rs.getString("addr"));
+					mb.setAge(rs.getInt("age"));
+					mb.setEmail(rs.getString("email"));
+					mb.setGender(rs.getString("gender"));
+					mb.setName(rs.getString("name"));
+					mb.setNation(rs.getString("nation"));
+					
+					memberList.add(mb);
+				}while(rs.next());
+			}	
+				
+			
+		}catch(Exception e) {
+			System.out.println("getDetailMember 에러1 : "+e.getMessage());
+		}finally {
+			try {
+				rs.close();
+				pstmt.close();
+			}catch(Exception e) {
+				System.out.println("getDetailMember 에러2 : "+e.getMessage());
+			}
+		}
+		return memberList;
+	}
+	
+	//회원 한명의 정보보기
+	public Member selectMember(String id) {
+		
+		Member mb=null;
+		
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		try {
+			pstmt=conn.prepareStatement("select * from users where id=?");
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				mb=new Member();
+				mb.setId(rs.getString("id"));
+				mb.setPasswd(rs.getString("passwd"));
+				mb.setAddr(rs.getString("addr"));
+				mb.setAge(rs.getInt("age"));
+				mb.setEmail(rs.getString("email"));
+				mb.setGender(rs.getString("gender"));
+				mb.setName(rs.getString("name"));
+				mb.setNation(rs.getString("nation"));	
+			}
+			
+		}catch(Exception e) {
+			System.out.println("회원정보보기에러1 : "+e.getMessage());
+		}finally {
+			try {
+				rs.close();
+				pstmt.close();
+			}catch(Exception e) {
+				System.out.println("회원정보보기에러2 : "+e.getMessage());
+			}
+		}
+		
+		return mb;
+	}
+	
+	
+	//회원정보 삭제
+	public int deleteMember(String id) {
+		
+		int deleteCount=0;
+		
+		PreparedStatement pstmt=null;
+		
+		try {
+			pstmt=conn.prepareStatement("delete from users where id=?");
+			pstmt.setString(1, id);
+			
+			deleteCount=pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			System.out.println("deleteMember 에러1 : "+e.getMessage());
+		}finally {
+			try {
+				pstmt.close();
+			}catch(Exception e) {
+				System.out.println("deleteMember 에러2: "+e.getMessage());
+			}			
+		}
+		
+		return deleteCount;
 	}
 	
 }

@@ -8,7 +8,7 @@ import static db.JdbcUtil.*;
 
 public class BoardDeleteProService {
 
-	public boolean isArticleWriter(int board_num, String pass) throws Exception{
+	public boolean isArticleWriter(int board_num, String pass) {
 		
 		boolean isArticleWriter=false;
 		
@@ -18,12 +18,12 @@ public class BoardDeleteProService {
 		
 		isArticleWriter=boardDAO.isArticleBoardWriter(board_num, pass);
 		
-		conn.close();
+		close(conn);
 		
 		return isArticleWriter;
 	}
 	
-	public boolean removeArticle(int board_num) throws Exception{
+	public boolean removeArticle(int board_num) {
 		
 		boolean isRemoveSuccess=false;
 		
@@ -33,13 +33,13 @@ public class BoardDeleteProService {
 		
 		int deleteCount=boardDAO.deleteArticle(board_num);
 		if(deleteCount>0) {
-			conn.commit();
+			commit(conn);
 			isRemoveSuccess=true;
 		}else {
-			conn.rollback();
+			rollback(conn);
 		}
 		
-		conn.close();
+		close(conn);
 		
 		return isRemoveSuccess;
 	}

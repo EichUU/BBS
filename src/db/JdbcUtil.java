@@ -1,6 +1,7 @@
 package db;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -51,6 +52,15 @@ public class JdbcUtil {
 			System.out.println(e.getMessage());
 		}
 	}
+	
+	//PreparedStatement 객체를 닫아주는 메소드
+		public static void close(PreparedStatement pstmt) {
+			try {
+				pstmt.close();
+			}catch(Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
 	
 	//ResultSet 객체를 닫아주는 메소드
 	public static void close(ResultSet rs) {

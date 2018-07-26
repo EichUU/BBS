@@ -18,8 +18,8 @@ public class DogCartQtyUpAction implements Action {
 		dogCartQtyUpService.upCartQty(kind, request); //장바구니 수량을 증가시키는 메소드를 호출
 		
 		ActionForward forward=new ActionForward(); 
-		forward.setPath("dogCartList.jsp");	//포워딩 페이지
-		forward.setRedirect(true);	//포워딩 방식은 리다이렉트방식으로				
+		forward.setPath("dogCartList.dog");	//포워딩 페이지
+		forward.setRedirect(true);				
 		
 		return forward;
 	}

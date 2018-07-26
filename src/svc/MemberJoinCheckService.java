@@ -4,12 +4,14 @@ import static db.JdbcUtil.getConnection;
 
 import java.sql.Connection;
 
+import static db.JdbcUtil.*;
+
 import dao.LoginDAO;
 import vo.Member;
 
-public class JoinCheckService {
+public class MemberJoinCheckService {
 
-	public String getCheckMember(String idCheck) throws Exception {
+	public String getCheckMember(String idCheck) {
 			
 		Connection conn=getConnection();
 		LoginDAO loginDAO=LoginDAO.getInstance();		
@@ -17,7 +19,7 @@ public class JoinCheckService {
 	
 		String checkmember=loginDAO.joinCheck(idCheck);				
 		
-		conn.close();
+		close(conn);
 		
 		return checkmember;
 		

@@ -20,6 +20,10 @@
 	border:1px solid red;
 	margin:auto;
 }
+#menu{
+	float:right;
+	
+}
 h2{
 	text-align:center;
 }
@@ -55,17 +59,21 @@ table{
 <div id="listForm">
 	<c:if test="${dogList!=null }">
 		<h2>개 상품 목록 </h2> 		
-		&nbsp;&nbsp;<a href="dogRegistForm.dog">개 상품등록</a>
+		<div id="menu">
+			<a href="dogRegistForm.dog">개 상품등록</a>&nbsp;&nbsp;
+			<a href="dogCartList.dog">장바구니목록</a>&nbsp;&nbsp;
+		</div>
+		
 		<table>
 			<tr>
-				<c:forEach var="dog" items="${dogList }" varStatus="status">
+				<c:forEach var="dog" items="${dogList }" varStatus="status">	<!-- 상품이 추가된만큼 연이여 배치할 수 있도록 -->
 					<td>
 						<a href="dogView.dog?id=${dog.id }">
 						<img src="images/${dog.image }" id="productImage" /></a>
 						상품명:${dog.kind }<br/>
 						가격:${dog.price }<br/>
 					</td>
-					<c:if test="${((status.index+1) mod 4)==0 }">
+					<c:if test="${((status.index+1) mod 4)==0 }">   <!-- 한 줄에 몇 개씩 표시하는가 -->
 			</tr>
 			<tr>		
 					</c:if>

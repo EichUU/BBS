@@ -9,16 +9,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import svc.JoinCheckService;
+import svc.MemberJoinCheckService;
 import vo.Member;
 
 @WebServlet("/Check")
 
-public class JoinCheck extends HttpServlet {
+public class MemberJoinCheck extends HttpServlet {
 
 	private static final long serialVersionUID=1L;
 
-	public JoinCheck() {
+	public MemberJoinCheck() {
 		super();
 	}
 
@@ -29,7 +29,7 @@ public class JoinCheck extends HttpServlet {
 	
 		String idCheck=request.getParameter("idCheck");
 		
-		JoinCheckService joinCheckService=new JoinCheckService();		
+		MemberJoinCheckService joinCheckService=new MemberJoinCheckService();		
 		
 		try {
 			String checkmember=joinCheckService.getCheckMember(idCheck);

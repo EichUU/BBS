@@ -58,7 +58,7 @@ public class DogRegistAction implements Action {	// 새로운 개 상품 정보�
 			PrintWriter out=response.getWriter();
 			out.println("<script>");
 			out.println("alert('등록실패');");
-			out.println("history,back()");
+			out.println("history,back();");
 			out.println("</script>");
 		}
 				

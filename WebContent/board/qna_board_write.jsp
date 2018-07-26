@@ -1,25 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ page import="svc.LoginService" %>
+<%@ page import="svc.MemberLoginService" %>
 <%@ page import="vo.Member" %>
     
 <%
-	String id=request.getParameter("id");
-	String passwd=request.getParameter("passwd");
-	
-	LoginService loginService=new LoginService(); 
-	Member loginMember=loginService.getLoginMember(id, passwd);
-	out.println(loginMember);
-	//로그인멤버가 받아지지 않는다...
-	//세션이 부여되지 않는다..
-	if(loginMember!=null) {	
-	session.setAttribute("id", id);
-	session.setAttribute("passwd", passwd);	
-	}
-	out.println(id);
-	
-%>    
+    	String id=request.getParameter("id");
+    	String passwd=request.getParameter("passwd");
+    	
+    	MemberLoginService loginService=new MemberLoginService(); 
+    	Member loginMember=loginService.getLoginMember(id, passwd);
+    	out.println(loginMember);
+    	//로그인멤버가 받아지지 않는다...
+    	//세션이 부여되지 않는다..
+    	if(loginMember!=null) {	
+    	session.setAttribute("id", id);
+    	}
+    	out.println(id);
+    %>    
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

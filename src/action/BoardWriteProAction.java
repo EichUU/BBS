@@ -51,7 +51,7 @@ public class BoardWriteProAction implements Action {
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out=response.getWriter();
 			out.println("<script>");
-			out.println("alert('등록실패')"); //자바 스크립트로 등록 실패 경고창을 출력
+			out.println("alert('등록실패');"); //자바 스크립트로 등록 실패 경고창을 출력
 			out.println("history.back();"); //이전 페이지로 되돌아가도록 처리
 			out.println("</script>");
 		}

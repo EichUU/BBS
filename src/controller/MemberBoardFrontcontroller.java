@@ -18,10 +18,17 @@ import action.BoardModifyProAction;
 import action.BoardReplyFormAction;
 import action.BoardReplyProAction;
 import action.BoardWriteProAction;
+import action.MemberDeleteAction;
+import action.MemberJoinAction;
+import action.MemberListAction;
+import action.MemberLoginAction;
+import action.MemberViewAction;
 import vo.ActionForward;
 
 @WebServlet("*.bo") //마지막url이 *.bo로 끝나는 요청을 매핑하는 서블릿으로 지정
-public class BoardFrontcontroller extends HttpServlet{
+public class MemberBoardFrontcontroller extends HttpServlet{
+	
+	private static final long serialVersionUID=1L;
 	
 	//게시판 프로젝트의 모든 웹 요청은 이 부분에서 제어된다
 
@@ -120,6 +127,59 @@ public class BoardFrontcontroller extends HttpServlet{
 				System.out.println(e.getMessage());
 			}
 		}
+		
+		//여기서부터가 멤버를 관리하는 FrontController
+		else if(command.equals("/memberLogin.bo")) {
+			forward=new ActionForward();
+			forward.setRedirect(true);
+			forward.setPath("./index.jsp");
+		}
+		else if(command.equals("/memberJoin.bo")) {
+			forward=new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("./joinForm.jsp");		
+		}
+		else if(command.equals("/memberLoginAction.bo")) {
+			action=new MemberLoginAction();
+			try {
+				forward=action.execute(request, response);
+			}catch(Exception e) {
+				System.out.println("MemberLoginAction 오류 : "+e.getMessage());
+			}
+		}
+		else if(command.equals("/memberJoinAction.bo")) {
+			action=new MemberJoinAction();
+			try {
+				forward=action.execute(request, response);
+			}catch(Exception e) {
+				System.out.println("MemberJoinAction 오류 : "+e.getMessage());
+			}
+		}
+		else if(command.equals("/memberListAction.bo")) {
+			action=new MemberListAction();
+			try {
+				forward=action.execute(request, response);
+			}catch(Exception e) {
+				System.out.println("MemberListAction 오류 : "+e.getMessage());
+			}
+		}
+		else if(command.equals("/memberViewAction.bo")) {
+			action=new MemberViewAction();
+			try {
+				forward=action.execute(request, response);
+			}catch(Exception e) {
+				System.out.println("MemberViewAction 오류 : "+e.getMessage());
+			}
+		}
+		else if(command.equals("/memberDeleteAction.bo")) {
+			action=new MemberDeleteAction();
+			try {
+				forward=action.execute(request, response);
+			}catch(Exception e) {
+				System.out.println("MemberDeleteAction 오류 : "+e.getMessage());
+			}
+		}
+		
 		
 		//각 Action클래스 객체에서 반환된 ActionForward객체 정보를 사용하여 포워딩 처리
 		if(forward!=null) {

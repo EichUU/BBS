@@ -19,12 +19,12 @@ public class BoardWriteProService {
 		int insertCount=boardDAO.insertArticle(boardBean); //주소값을 저장 , 주소가 있으면 1, 없으면 0
 		
 		if(insertCount>0) {
-			conn.commit();
+			commit(conn);
 			isWriteSuccess=true;
 		}else {
-			conn.rollback();
+			rollback(conn);
 		}
-		conn.close();
+		close(conn);
 		
 		return isWriteSuccess;
 	}

@@ -1,6 +1,6 @@
 package svc;
 
-import static db.JdbcUtil.getConnection;
+import static db.JdbcUtil.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import vo.BoardBean;
 
 public class BoardListService {
 
-		public int getListCount() throws Exception{
+		public int getListCount() {
 			
 			int listCount=0;
 			Connection conn=getConnection();
@@ -18,12 +18,12 @@ public class BoardListService {
 			boardDAO.setConnection(conn);
 			
 			listCount=boardDAO.selectListCount();
-			conn.close();
+			close(conn);
 			
 			return listCount;
 		}
 		
-		public ArrayList<BoardBean> getArticleList(int page, int limit) throws Exception{
+		public ArrayList<BoardBean> getArticleList(int page, int limit) {
 			
 			ArrayList<BoardBean> articleList=null;
 			Connection conn=getConnection();
@@ -31,7 +31,7 @@ public class BoardListService {
 			boardDAO.setConnection(conn);
 			
 			articleList=boardDAO.selectArticleList(page, limit);
-			conn.close();
+			close(conn);
 			
 			return articleList;
 		}
