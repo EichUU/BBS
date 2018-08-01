@@ -139,9 +139,10 @@ table{
 				<td><%=id %>님 환영합니다</td>
 			</tr>
 			<tr>								
-				<td><a href="logout">로그아웃</a></td>
+				<td><a href="logout">로그아웃</a></td>				
 			</tr>			
-		</table>	
+		</table>
+		<td><a href="infoChange.jsp">회원정보변경</a></td>	
 	</div>
 	<%	} %>
 	</div>

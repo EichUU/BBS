@@ -1,21 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-
+<%
+	String id=(String)session.getAttribute("id");
+%>    
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script>
-	function goCheck(){
-		var popUrl = "joinCheck.jsp";	//팝업창에 출력될 페이지 URL
-		var popOption = "width=540, height=300, resizable=no, scrollbars=no, status=no;";    //팝업창 옵션(optoin)
-
-			window.open(popUrl,"",popOption);
-
-		}
-</script>
 <style>	
 	h4{
 		text-align:center;
@@ -23,25 +17,25 @@
 	table{
 		margin :auto;		
 		width:400px;
-		border:1px solid #red;
+		border:1px solid #ccc;
 		text-align:center;
 	}
 	tr{
 		padding:10px;
 	}
-</style>
+</style>	
 </head>
 <body>
 
-<h4>회원가입 페이지</h4>
+<h4>회원정보 변경</h4>
 
-<form action="Join" method="post">
+<form action="infoChange" method="post">
 																	
 	<table>
 		<tr>
 			<td><label for="id">아이디</label></td>
-			<td><input type="text" name="id" id="id"  placeholder="아이디" required />
-				<input type="button" value="중복확인" onclick="goCheck()" /></td>
+			<td><%=id %></td>
+				
 		</tr>
 		
 		<tr >
@@ -79,7 +73,7 @@
 		</tr>	
 		<tr>
 			<td colspan="2">
-				<input type="submit" value="회원가입"/>&nbsp;&nbsp;
+				<input type="submit" value="정보변경"/>&nbsp;&nbsp;
 				<input type="reset" value="다시작성"/>
 			</td>			
 		</tr>
@@ -87,5 +81,4 @@
 	</table>
 </form>
 </body>
-
 </html>
